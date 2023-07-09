@@ -8,7 +8,9 @@ def home(request):
 
 
 def gerenciar(request):
-    return render(request, 'gerenciar.html')
+    contas = Conta.objects.all()
+    print(contas)
+    return render(request, 'gerenciar.html', {'contas': contas})
 
 def cadastrar_banco(request):
     apelido = request.POST.get('apelido')
