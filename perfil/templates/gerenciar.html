@@ -26,7 +26,7 @@
                     {% for conta in contas %}
                         <div class="lista-contas-main">
                             <span><img width="10%" src="{{conta.icone.url}}"> {{conta.apelido}} </span>
-                            <span class="total-conta positivo "> R${{ conta.valor }} <a href="#"><img src="/static/perfil/img/exit.png"></a></span>
+                            <span class="total-conta positivo "> R${{ conta.valor }} <a href="/perfil/deletar_banco/{{conta.id}}"><img src="/static/perfil/img/exit.png"></a></span>
                         </div>
                         <br>
                     {% endfor %}
@@ -36,7 +36,7 @@
 
                 <hr>
                 <span class="fonte-destaque">Total:</span>
-                <span class="positivo total-conta font-destaque">R$ 1.800,00</span>
+                <span class="positivo total-conta font-destaque">R$ {{total_conta}}</span>
             </div>
 
             <div class="col-md-2"></div>
@@ -65,7 +65,7 @@
                     <input type="file" placeholder="Ícone" name="icone" required>
                     <br>
                     <br>
-                    <input style="width: 100%" type="submit" class="botao-principal">
+                    <input style="width: 100%" type="submit" class="botao-principal" value="Cadastrar">
                 </form>
             </div>
         </div>

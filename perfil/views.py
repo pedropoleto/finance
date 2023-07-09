@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from .models import Conta
 from django.contrib import messages
 from django.contrib.messages import constants
@@ -9,8 +10,10 @@ def home(request):
 
 def gerenciar(request):
     contas = Conta.objects.all()
-    print(contas)
-    return render(request, 'gerenciar.html', {'contas': contas})
+    total_conta = 0
+    for conta in contas:
+        total_conta = conta.valor + total_conta
+    return render(request, 'gerenciar.html', {'contas': contas, 'total_conta': total_conta})
 
 def cadastrar_banco(request):
     apelido = request.POST.get('apelido')
@@ -34,4 +37,11 @@ def cadastrar_banco(request):
     conta.save()
     messages.add_message(request, constants.SUCCESS, 'Dados salvos com sucesso!')
 
+    return redirect('/perfil/gerenciar')
+
+
+def deletar_banco(request, id):
+    conta = Conta.objects.get(id=id)
+    conta.delete()
+    messages.add_message(request, constants.SUCCESS, 'Conta deletada com sucesso!')
     return redirect('/perfil/gerenciar')
