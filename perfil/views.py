@@ -27,6 +27,10 @@ def cadastrar_banco(request):
     if len(apelido.strip()) == 0 or len(valor.strip()) == 0:
         messages.add_message(request, constants.ERROR, 'Preencha todos os campos!')
         return redirect('/perfil/gerenciar')
+    
+    if len(valor.strip()) == 0:
+        messages.add_message(request, constants.ERROR, 'Preencha todos os campos!')
+        return redirect('/perfil/gerenciar')
 
     conta = Conta(
         apelido=apelido,
@@ -71,3 +75,6 @@ def update_categoria(request, id):
     categoria.essencial = not categoria.essencial
     categoria.save()
     return redirect('/perfil/gerenciar')
+
+def definir_planejamento(request):
+    return render(request, 'definir_planejamento.html')
